@@ -1,0 +1,28 @@
+# Project: ClinVet
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = main.o
+LINKOBJ  = main.o
+LIBS     = -L"C:/MinGW/lib" -L"C:/MinGW/lib/gcc/mingw32/6.3.0/adainclude" -L"C:/MinGW/lib/gettext" -L"C:/MinGW/lib/gcc/mingw32/6.3.0/adalib" -L"C:/MinGW/lib/gcc/mingw32/6.3.0/debug" -L"C:/MinGW/libexec/mingw-get" -L"C:/MinGW/libexec/gcc/mingw32/6.3.0/install-tools" -L"C:/Users/Wita/Desktop/ClinVet/conector/lib/vs12" -L"C:/Users/Wita/Desktop/ClinVet/conector/lib/vs14" -L"C:/Users/Wita/Desktop/ClinVet/conector/lib" -L"C:/Users/Wita/Desktop/ClinVet/conector/lib/vs12" -L"C:/Users/Wita/Desktop/ClinVet/conector/lib/vs14" -lobjc -g3
+INCS     = -I"C:/MinGW/include" -I"C:/MinGW/include/ddk" -I"C:/MinGW/include/gdiplus" -I"C:/MinGW/include/GL" -I"C:/MinGW/include/libltdl" -I"C:/MinGW/include/parts" -I"C:/MinGW/include/sys" -I"C:/Users/Wita/Desktop/ClinVet/conector/include/mysql" -I"C:/Users/Wita/Desktop/ClinVet/conector/include/mysql/psi"
+CXXINCS  = -I"C:/MinGW/include"
+BIN      = ClinVet.exe
+CXXFLAGS = $(CXXINCS) -g3
+CFLAGS   = $(INCS) -g3
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
