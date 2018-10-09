@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000011000000
-UnitCount=5
+UnitCount=3
 
 [VersionInfo]
 Major=1
@@ -60,18 +60,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit2]
-FileName=library.h
-CompileCpp=0
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit3]
-FileName=arquivo.h
+FileName=sessoes.h
 CompileCpp=0
 Folder=
 Compile=1
@@ -92,6 +82,16 @@ BuildCmd=
 
 [Unit5]
 FileName=sessoes.h
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit2]
+FileName=animal.h
 CompileCpp=0
 Folder=
 Compile=1

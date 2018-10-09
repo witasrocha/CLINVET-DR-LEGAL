@@ -3,7 +3,7 @@ typedef struct sessoes{
 		int v; 
 		int k;
 		char*data; 
-		char*tipo; 
+		int tipo; 
 		char*sintomas; 
 		char*diagnostico; 
 		char*vacinas; 
@@ -24,13 +24,13 @@ t_sessoes *chain = NULL;
 
 // função para criar uma lista
 // recebe um valor inteiro e retorna um ponteiro do tipo t_sessoes
-t_sessoes * create_list(int valor,int k, char*data, char*tipo, char*sintomas, char*diagnostico, char*vacinas, char*exames, float preco)
+t_sessoes * create_list(int valor,int k, char*data, int tipo, char*sintomas, char*diagnostico, char*vacinas, char*exames, float preco)
 {
 	
 	// aloca espaço em memória
 	t_sessoes * p = (t_sessoes*)malloc(sizeof(t_sessoes));    
 	p->data = malloc(10); 
-	p->tipo = malloc(255); 
+//	p->tipo = malloc(255); 
 	p->sintomas = malloc(255); 
 	p->diagnostico = malloc(255); 
 	p->vacinas = malloc(255); 
@@ -65,7 +65,7 @@ t_sessoes * create_list(int valor,int k, char*data, char*tipo, char*sintomas, ch
 // função que adiciona um elemento à lista
 // recebe a head e o elemento a ser adicionado
 // o elemento é inserido no FINAL da lista
-t_sessoes* add_list(int v, int k,  char*data, char*tipo, char*sintomas, char*diagnostico, char*vacinas, char*exames, float preco)
+t_sessoes* add_list(int v, int k,  char*data, int tipo, char*sintomas, char*diagnostico, char*vacinas, char*exames, float preco)
 {
 	// verifica se a head é NULL (lista vazia), se for NULL,
 	// então retorna o retorno da função criar_lista
@@ -77,8 +77,8 @@ t_sessoes* add_list(int v, int k,  char*data, char*tipo, char*sintomas, char*dia
 	// se chegou aqui é porque a lista NÃO é vazia
 	// aloca espaço em memória
 	t_sessoes * p = (t_sessoes*)malloc(sizeof(t_sessoes));
-    p->data = malloc(10); 
-	p->tipo = malloc(255); 
+    p->data = malloc(255); 
+	//p->tipo = malloc(255); 
 	p->sintomas = malloc(255); 
 	p->diagnostico = malloc(255); 
 	p->vacinas = malloc(255); 
@@ -123,13 +123,27 @@ void print_list()
 	// variável ponteiro "aux" para percorrer a lista
 	// inicialmente aponta para a "head"
 	t_sessoes *aux = head;
-    printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX LISTAGEM DE SESSOES XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"  ); 
-    printf("%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\n", "ANIMAL", "SESSAO", "DATA","TIPO","SINTOMAS","DIAGNOSTICO","VACINAS","EXAME","PRECO"  ); 
+    printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXX LISTAGEM DE SESSOES XXXXXXXXXXXXXXXXXXXXXXXXXX"  ); 
+    //printf("%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\n", "ANIMAL", "SESSAO", "DATA","TIPO","SINTOMAS","DIAGNOSTICO","VACINAS","EXAME","PRECO"  ); 
+    
+    
+    
 	// enquanto "aux" for diferente de NULL
 	while(aux != NULL)
 	{
 		// imprime o valor
-		printf("%10d\t%10d\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10f\n", aux->v,aux->k, aux->data, aux->tipo, aux->sintomas, aux->diagnostico, aux->vacinas, aux->exames, aux->preco);
+		//printf("%10d\t%10d\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10f\n", aux->v,aux->k, aux->data, aux->tipo, aux->sintomas, aux->diagnostico, aux->vacinas, aux->exames, aux->preco);
+		printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
+		printf("IDANIMAL: %8d\n", aux->v);
+		printf("IDSESSAO: %8d\n", aux->k);
+		printf("DATA: %8s\n", aux->data);
+		printf("TIPO: %8d\n", aux->tipo);
+		printf("SINTOMAS: %8s\n", aux->sintomas);
+		printf("DIAGNOSTICO %8s\n", aux->diagnostico);
+		printf("VACINAS: %8s\n", aux->vacinas);
+		printf("EXAMES: %8s\n", aux->exames);
+		printf("PRECO: %8f\n", aux->preco);
+		printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
 		
 		
 		

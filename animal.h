@@ -19,8 +19,8 @@ typedef struct animal
 // cabeca da lista encadeada (começa com NULL)
 //t_animal *cabeca = NULL;
 //t_animal *corrente = NULL;
-t_animal *cabeca=NULL;
-t_animal *corrente=NULL;
+t_animal *cabeca;
+t_animal *corrente;
 
 
 // função para criar uma lista
@@ -106,8 +106,7 @@ t_animal* adicionar_lista(int v, char*nomeanimal, char*especie, char*raca, int i
 	p->prox = NULL;
 
 	// insere no FINAL da lista (obs.: também poderia ser no início)
-	// aqui será feita a inserção no final,
-	// a inserção no início fica como um desafio ;-)
+	// aqui será feita a inserção no final,	
 	// para inserção no final, fazemos com que o próximo do nó
 	// corrente aponte para o "p"
 	corrente->prox = p;
@@ -122,7 +121,7 @@ t_animal* adicionar_lista(int v, char*nomeanimal, char*especie, char*raca, int i
 // função que imprime a lista
 void imprimir_lista()
 {
-	fflush(stdout);
+	//fflush(stdout);
 
 	// variável ponteiro "aux" para percorrer a lista
 	// inicialmente aponta para a "cabeca"

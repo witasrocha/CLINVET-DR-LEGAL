@@ -45,10 +45,6 @@ int main(void) {
 	//adicionar_lista(2,"SCOOBY DOO","CACHORRO", "DESCONHECIDO",2, "SALCICHA", 50,"77777777" ); 
 	//adicionar_lista(3, "MILK SHAKE","GATO", "DESCONHECIDO",4, "BILLY E MANDY", 100,"777-77777" ); 	
 	// função que verifica se a lista está vazia
-	if(lista_vazia() == 0)
-		printf("A lista NAO esta vazia!!\n\n");
-	else
-		printf("Lista vazia!!\n\n");
 	
 	printf("Tamanho da lista: %d\n\n", tamanho_lista());
 
@@ -60,13 +56,23 @@ int main(void) {
    	
    int escolha=1; 
    int id;         
-   char*nome=malloc(10);    
-   char*especie=malloc(10); 
-   char*raca=malloc(10); 
+   char*nome=malloc(255);    
+   char*especie=malloc(255); 
+   char*raca=malloc(255); 
    int idade; 
-   char*nomeproprietario=malloc(10); 
+   char*nomeproprietario=malloc(255); 
    float conta; 
    char*telefone=malloc(11); 
+   
+   //sessoes
+        int idsession; 
+        char*data=malloc(255); 
+		char*tipo=malloc(255); 
+		char*sintomas=malloc(255); 
+		char*diagnostico=malloc(255); 
+		char*vacina=malloc(255); 
+		char*exame=malloc(255); 
+		float preco;
    
    //fp = fopen("newfile.txt", "w+");
 
@@ -76,10 +82,15 @@ int main(void) {
 	//raca = malloc(sizeof(raca)); 
 	//nomeproprietario = malloc(sizeof(nomeproprietario)); 
 	//telefone = malloc(sizeof(telefone)); 
-	    
-    	        		
+	        	        		
 		while(escolha!=8){
+		    
+		    if(lista_vazia() == 0)
+			printf("A lista NAO esta vazia!!\n\n");
+			else
+			printf("Lista vazia!!\n\n");
 		
+			printf("Tamanho da lista: %d\n\n", tamanho_lista());
 			printf(" \n %8s \n","XXXXXXXXXXXXXXXXX  CONSULTORI VET DR LEGAL XXXXXXXXXXXXXXXXXXXXXXXXX"  );  
 		    printf("%8d\t%8s\n", 1,"CADASTRAR ANIMAL");		
 		    printf("%8d\t%8s\n", 2,"REMOVER ANIMAL");		
@@ -107,12 +118,12 @@ int main(void) {
 					if(get_size("petnames.txt") == 0)
 					{
 					    printf("BASE DE DADOS VAZIA.");
-					    id=0; 
+					    //id=0; 
 					}
 					else
 					{
 						
-						FILE* stream = fopen("petnames.txt", "r");
+					FILE* stream = fopen("petnames.txt", "r");
 
 				    char line[1024];
 				    while (fgets(line, 1024, stream))
@@ -144,6 +155,14 @@ int main(void) {
 				        //printf("Field 3 would be %s\n", getfield(tmp, 5));
 				        // NOTE strtok clobbers tmp
 				        free(tmp);
+				        fclose(stream); 
+				        
+						printf("LIMPANDO BASE DE DADOS ANTERIOR..."); 
+							if (remove("petnames.txt") == 0) 
+		      						printf("ARQUIVO EXCLUIDO COM SUCESSO"); 
+		   						else
+		      						printf("NAO FOI POSSIVEL EXCLUIR ARQUIVO"); 
+				        
 				    }
 					    
 					}
@@ -151,17 +170,17 @@ int main(void) {
 				
 					printf("\n\n Opcao escolhida: 1 \n ");	
 					printf("INSIRA O NOME DO ANIMAL:");						
-					fgets(nome,30,stdin); 
+					fgets(nome,255,stdin); 
 					nome[strlen(nome) - 1] = '\0';
 
 					fflush(stdin); 
 					printf("INSIRA A ESPECIE DO ANIMAL:");		
-					fgets(especie,30,stdin); 
+					fgets(especie,255,stdin); 
 					especie[strlen(especie) - 1] = '\0';
 
 					fflush(stdin);
 					printf("INSIRA A RACA DO ANIMAL:");		
-					fgets(raca,30,stdin); 
+					fgets(raca,255,stdin); 
 					raca[strlen(raca) - 1] = '\0';
 
 					fflush(stdin);
@@ -169,7 +188,7 @@ int main(void) {
 					scanf("%d",&idade); 					
 					fflush(stdin);
 					printf("INSIRA O NOME DO PROPRIETARIO DO ANIMAL:");		
-					fgets(nomeproprietario,30,stdin); 
+					fgets(nomeproprietario,255,stdin); 
 					nomeproprietario[strlen(nomeproprietario) - 1] = '\0';
 
 					fflush(stdin);
@@ -177,15 +196,17 @@ int main(void) {
 					scanf("%f",&conta); 
 					fflush(stdin);
 					printf("INSIRA O VALOR DO TELEFONE:");		
-					fgets(telefone, 11, stdin); 
+					fgets(telefone, 255, stdin); 
 					telefone[strlen(telefone) - 1] = '\0';
 
 					fflush(stdin);
-					
-					adicionar_lista(tamanho_lista(),nome,especie, raca, idade, nomeproprietario, conta, telefone ); 
+					int l = tamanho_lista(); 
+					adicionar_lista(l,nome,especie, raca, idade, nomeproprietario, conta, telefone ); 
+															
 					
 					printf("SALVANDO INFORMACOES..."); 
-					FILE * fptr;
+					    					    					    
+				     	FILE * fptr;
 					    fptr = fopen("petnames.txt", "w");
 					
 					    if(fptr==NULL)
@@ -196,10 +217,11 @@ int main(void) {
 					    else
 					    {
 					    	t_animal *aux = cabeca;
+					    	int t = 1; 
 					        while(aux != NULL)
 					        {
 					            //fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n" );
-					            fprintf(fptr,"%d,", aux->v);
+					            fprintf(fptr,"%d,", t);
 								fprintf(fptr,"%s,", aux->nomeAnimal);
 								fprintf(fptr,"%s,", aux->especie);
 								fprintf(fptr,"%s,", aux->raca);
@@ -209,6 +231,7 @@ int main(void) {
 								fprintf(fptr,"%s,\n", aux->telefone);
 								//fprintf(fptr,"\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
 					            aux = aux->prox;
+					            t++; 
 					        }
 					    }
 					
@@ -379,8 +402,63 @@ int main(void) {
 				}
 				
 				case 7:
-				{				
-					printf("\n\n Opcao escolhida: 7 ");
+				{			
+				    int idanima,ls,tipo; 
+				    //int idsession; 
+			        //char*data=malloc(255); 
+					//char*tipo=malloc(255); 
+					//char*sintomas=malloc(255); 
+					//char*diagnostico=malloc(255); 
+					//char*vacina=malloc(255); 
+					//char*exame=malloc(255); 
+					//float preco;
+				    ls = size_list(); 
+				    
+				    printf("\n\n Opcao escolhida: 7 \n ");	
+					printf("INSIRA O ID DO ANIMAL:");						
+					scanf("%d",&idanima); 										
+					fflush(stdin); 
+					printf("INSIRA A DATA:");		
+					fgets(data,255,stdin); 
+					data[strlen(data) - 1] = '\0';		
+					fflush(stdin); 
+					printf("INSIRA OS SINTOMAS:");		
+					fgets(sintomas,255,stdin); 
+					sintomas[strlen(sintomas) - 1] = '\0';
+					fflush(stdin);
+					printf("INSIRA O TIPO <1>VAC <2> CON <3> EXA:");		
+					scanf("%d",&tipo); 	
+					
+					fflush(stdin); 
+					printf("INSIRA A VACINA:");		
+					fgets(vacina,255,stdin); 						
+					vacina[strlen(vacina) - 1] = '\0';
+					
+					fflush(stdin); 
+					printf("INSIRA OS EXAMES :");		
+					fgets(exame,255,stdin); 						
+					exame[strlen(exame) - 1] = '\0';
+					fflush(stdin); 
+					fflush(stdin); 
+					printf("INSIRA O DIAGNOSTICO :");		
+					fgets(diagnostico,255,stdin); 						
+					exame[strlen(diagnostico) - 1] = '\0';
+					fflush(stdin); 			
+					
+					if(tipo ==1){												
+						preco = 50; 												
+					}else if(tipo==2){					   					   
+					    preco = 30; 
+					   
+					}else if(tipo==3){					  					   
+					   preco = 110; 					   
+					}
+					
+					
+					add_list(idanima,ls, data, tipo, sintomas,diagnostico, vacina, exame, preco); 
+										
+					print_list(); 
+															
 					break;
 				
 				}
