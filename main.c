@@ -36,18 +36,8 @@ int get_size(const char* file_name)
 
 int main(void) {
 	
-	
-	//criar_lista(1,"XXXXX","XXXXX", "XXXX",2, "XXXX", 0,"XXXXXXX" );	
-	
-	
-	int i=1; 
-	
-	//adicionar_lista(2,"SCOOBY DOO","CACHORRO", "DESCONHECIDO",2, "SALCICHA", 50,"77777777" ); 
-	//adicionar_lista(3, "MILK SHAKE","GATO", "DESCONHECIDO",4, "BILLY E MANDY", 100,"777-77777" ); 	
-	// função que verifica se a lista está vazia
-			
-		   
-   
+		int i=1; 
+					      
    	
    int escolha=1; 
    int id;         
@@ -68,6 +58,17 @@ int main(void) {
 		char*vacina=malloc(255); 
 		char*exame=malloc(255); 
 		float preco;
+	
+	
+	   printf("...LIMPANDO BASE DE DADOS ANTERIOR..."); 
+	 	if (remove("petnames.txt") == 0) 
+	 			printf("...ARQUIVO EXCLUIDO COM SUCESSO..."); 
+	 		else
+				printf("...NAO FOI POSSIVEL EXCLUIR ARQUIVO."); 
+		
+
+       criar_lista(0,"COSTELINHA","CACHORRO","DESCONHECIDO",1,"DOUG FUNNY",0,0);
+       create_list(0,0, "00/00", 1, "N","N", "N", "N", 0); 
    
    //fp = fopen("newfile.txt", "w+");
 
@@ -77,7 +78,7 @@ int main(void) {
 	//raca = malloc(sizeof(raca)); 
 	//nomeproprietario = malloc(sizeof(nomeproprietario)); 
 	//telefone = malloc(sizeof(telefone)); 
-	        	        		
+	    int contagem=1;     	        		
 		while(escolha!=8){
 		    		   		
 			//printf("Tamanho da lista: %d\n\n", tamanho_lista());
@@ -102,60 +103,7 @@ int main(void) {
 		switch (escolha) {
 		
 				case 1:
-				{	
-				    printf("ATUALIZANDO BASE DE DADOS..."); 					 
-					
-					if(get_size("petnames.txt") == 0)
-					{
-					    printf("BASE DE DADOS VAZIA.");
-					    //id=0; 
-					}
-					else
-					{
-						
-					FILE* stream = fopen("petnames.txt", "r");
-
-				    char line[1024];
-				    while (fgets(line, 1024, stream))
-				    {
-				        char* tmp = strdup(line);	
-				        char* tmp2 = strdup(line);	
-				        char* tmp3 = strdup(line);	
-				        char* tmp4 = strdup(line);	
-				        char* tmp5 = strdup(line);	
-				        char* tmp6 = strdup(line);	
-				        char* tmp7 = strdup(line);	
-				        char* tmp8 = strdup(line);	
-				        
-						id = atoi(getfield(tmp, 1)); 						
-						nome = getfield(tmp2, 2); 
-						especie= getfield(tmp3, 3); 
-						raca= getfield(tmp4, 4); 
-						idade= atoi(getfield(tmp5, 5)); 
-						nomeproprietario= getfield(tmp6, 6); 
-						conta= strtof(getfield(tmp7, 7),NULL); 
-						telefone= getfield(tmp8, 8); 
-												
-						
-						fflush(stdin); 
-						//printf(" %s\n", getfield(tmp, 5));
-						//nome[30] = (char*)getfield(tmp2, 2);
-						//printf("nome: %s", nome); 
-				        adicionar_lista(id,nome,especie,raca,idade,nomeproprietario,conta,telefone); 
-				        //printf("Field 3 would be %s\n", getfield(tmp, 5));
-				        // NOTE strtok clobbers tmp
-				        free(tmp);
-				        fclose(stream); 
-				        
-						printf("LIMPANDO BASE DE DADOS ANTERIOR..."); 
-							if (remove("petnames.txt") == 0) 
-		      						printf("ARQUIVO EXCLUIDO COM SUCESSO"); 
-		   						else
-		      						printf("NAO FOI POSSIVEL EXCLUIR ARQUIVO"); 
-				        
-				    }
-					    
-					}
+				{					    
 									    	
 				
 					printf("\n\n Opcao escolhida: 1 \n ");	
@@ -190,9 +138,9 @@ int main(void) {
 					telefone[strlen(telefone) - 1] = '\0';
 
 					fflush(stdin);
-					int l = tamanho_lista(); 
-					adicionar_lista(l,nome,especie, raca, idade, nomeproprietario, conta, telefone ); 
-															
+					//int l = tamanho_lista(); 
+					adicionar_lista(contagem,nome,especie, raca, idade, nomeproprietario, conta, telefone ); 
+					contagem++; 										
 					
 					printf("SALVANDO INFORMACOES..."); 
 					    					    					    
@@ -233,23 +181,60 @@ int main(void) {
 				case 2:
 				{				
 					printf("\n\n Opcao escolhida: 2 \n");
+				
 					int j, r; 
 									
 					printf("INSIRA O ID DO ANIMAL QUE DESEJA REMOVER:");						
-					scanf("%d", &j); 
-					if(j==1){						
-						printf("NAO E PERMITIDO REMOVER O PRIMEIRO REGISTRO");						
-					}else{
-						
+				
+					scanf("%d", &j); 															
 						r=remover_elemento(j); 
+						
 						if(r==1){
-							printf("REMOVIDO COM SUCESSO");						
+						//FILE* stream = fopen("petnames.txt", "r");
+						printf("LIMPANDO BASE DE DADOS ANTERIOR..."); 
+					 	if (remove("petnames.txt") == 0) 
+	      			 			printf("...ARQUIVO EXCLUIDO COM SUCESSO..."); 
+	   				 		else
+	      						printf("...NAO FOI POSSIVEL EXCLUIR ARQUIVO..."); 
+						printf("... ELEMENTO REMOVIDO COM SUCESSO...");	
+						//fclose(stream); 
+												
+						FILE* stream2= fopen("petnames.txt", "w");
+							
+							if(stream2==NULL)
+					    {
+					        printf("Error\n");
+					    }
+					
+					    else
+					    {
+					    	t_animal *aux = cabeca;
+					    	int t = 1; 
+					        while(aux != NULL)
+					        {
+					            //fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n" );
+					            fprintf(stream2,"%d,", t);
+								fprintf(stream2,"%s,", aux->nomeAnimal);
+								fprintf(stream2,"%s,", aux->especie);
+								fprintf(stream2,"%s,", aux->raca);
+								fprintf(stream2,"%d,", aux->idade);
+								fprintf(stream2,"%s,", aux->nomeProprietario);
+								fprintf(stream2,"%f,", aux->conta);
+								fprintf(stream2,"%s,\n", aux->telefone);
+								//fprintf(fptr,"\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
+					            aux = aux->prox;
+					            t++; 
+					        }
+					    }
+					
+					    fclose(stream2);
+							
 						}else{
 							
-							printf("NAO FOI POSSIVEL REMOVER");						
-					}
+							printf("NAO FOI POSSIVEL REMOVER O ELEMENTO");						
+					    }
 					
-					}																				
+																									
 					break;
 				}
 				
@@ -303,6 +288,44 @@ int main(void) {
 					p->idade = idade; 
 					p-> telefone = telefone; 	
 						
+					//FILE* stream = fopen("petnames.txt", "r");
+						printf("LIMPANDO BASE DE DADOS ANTERIOR..."); 
+					 	if (remove("petnames.txt") == 0) 
+	      			 			printf("...ARQUIVO EXCLUIDO COM SUCESSO..."); 
+	   				 		else
+	      						printf("...NAO FOI POSSIVEL EXCLUIR ARQUIVO..."); 
+						//printf("REMOVIDO COM SUCESSO");	
+					//	fclose(stream); 
+												
+						FILE* stream2= fopen("petnames.txt", "w");
+							
+							if(stream2==NULL)
+					    {
+					        printf("Error\n");
+					    }
+					
+					    else
+					    {
+					    	t_animal *aux = cabeca;
+					    	int t = 1; 
+					        while(aux != NULL)
+					        {
+					            //fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n" );
+					            fprintf(stream2,"%d,", t);
+								fprintf(stream2,"%s,", aux->nomeAnimal);
+								fprintf(stream2,"%s,", aux->especie);
+								fprintf(stream2,"%s,", aux->raca);
+								fprintf(stream2,"%d,", aux->idade);
+								fprintf(stream2,"%s,", aux->nomeProprietario);
+								fprintf(stream2,"%f,", aux->conta);
+								fprintf(stream2,"%s,\n", aux->telefone);
+								//fprintf(fptr,"\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
+					            aux = aux->prox;
+					            t++; 
+					        }
+					    }
+					
+					    fclose(stream2);
 												
 					}
 					
@@ -331,7 +354,7 @@ int main(void) {
 					printf("DONO: %8s\n", p->nomeProprietario);
 					printf("CONTA: %8f\n", p->conta);
 					printf("TELEFONE: %8s\n", p->telefone);
-					printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 	
+					printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 	
 						
 					}
 					
@@ -345,41 +368,36 @@ int main(void) {
 				{				
 					
 					t_animal *ant = NULL;
-					t_animal*p; 
-					t_sessoes*q; 
-					t_sessoes *back = NULL;
+					//t_animal*p; 
+					t_animal*no; 
+					no=malloc(sizeof(no)); 
+					t_sessoes*q=malloc(sizeof(t_sessoes)); 
+					t_sessoes*auxiliar; 
+					print_list(); 
+					//t_sessoes *back = NULL;	
+					float sum=0; 													
 					
 					printf("\n\n Opcao escolhida: 5 \n");
 					int j, r, b, contador; 									
 					printf("\n INSIRA O ID DO ANIMAL QUE DESEJA BUSCAR:");						
 					scanf("%d", &j); 
-					p = buscar_elemento(j,&ant); 
-					if(p==NULL){
-						
-					printf("\n ANIMAL NAO ENCONTRADO \n"); 
+					
+					no = buscar_elemento(j, &ant); 
+					
+					if(no==NULL){
+					//r = j; 	
+					printf("\n ANIMAL NAO ENCONTRADO\n"); 
 					}else{
-						
-					    q = search_element(j, &back); 
-					    if(q==NULL){
-					    	
-					    	printf("\n SESSAO NAO ENCONTRADA \n"); 
-					    	
+						if(q==NULL){
+							printf("\n SESSAO NAO ENCONTRADA\n"); 
+							
 						}else{
 						
-							printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
-							printf("ID: %8d\n", p->v);
-							printf("NOME: %8s\n", p->nomeAnimal);
-							printf("ESPECIE: %8s\n", p->especie);
-							printf("RACA: %8s\n", p->raca);
-							printf("IDADE %8d\n", p->idade);
-							printf("DONO: %8s\n", p->nomeProprietario);
-							printf("CONTA TOTAL: %8f\n", soma());
-							printf("TELEFONE: %8s\n", p->telefone);
-							printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
+						
+					      	FILE * fptr;														
 							
-							
-							FILE * fptr;
-					        fptr = fopen(strcat(p->nomeAnimal,".txt"), "w");
+					        fptr = fopen(strcat(no->nomeAnimal,".txt"), "w");
+					        //fptr = fopen("report.txt", "w");
 					
 						    if(fptr==NULL)
 						    {
@@ -388,50 +406,58 @@ int main(void) {
 						
 						    else
 						    {
-						    		printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 																
-						          //fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n" );
-						            fprintf(fptr,"%d,", p->v);
-									fprintf(fptr,"%s,", p->nomeAnimal);
-									fprintf(fptr,"%s,", p->especie);
-									fprintf(fptr,"%s,", p->raca);
-									fprintf(fptr,"%d,", p->idade);
-									fprintf(fptr,"%s,", p->nomeProprietario);
-									fprintf(fptr,"%f,", soma());
-									fprintf(fptr,"%s,\n", p->telefone);
-									
-									q=head; 									
-									contador = 0; 
-									while (q!=NULL){
-										
-										if(contador<10){
-											fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 										
-											fprintf(fptr, "IDSESSAO: %8d\n", q->k);
-											fprintf(fptr,"DATA: %8s\n", q->data);
-											fprintf(fptr, "TIPO: %8d\n", q->tipo);
-											fprintf(fptr, "SINTOMAS: %8s\n", q->sintomas);
-											fprintf(fptr, "DIAGNOSTICO %8s\n", q->diagnostico);
-											fprintf(fptr, "VACINAS: %8s\n", q->vacinas);
-											fprintf(fptr, "EXAMES: %8s\n", q->exames);
-											fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 																						
-										}
-										
-										
-										q=q->prox; 
-										
-										contador++; 
-										
-									}
-									//fprintf(fptr, "%s,\n",print_list()); 
-									//fprintf(fptr,"\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
-						        
-						        
-						    }
-						
-						    fclose(fptr);
+	                                
+	                                	
+                              // fprintf(fptr,"\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 																
+					           fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n" );
+					            fprintf(fptr,"ID DO ANIMAL: %d,", no->v);
+								//fprintf(fptr,"%s,", no->nomeAnimal);
+								fprintf(fptr,"ESPECIE: %s,", no->especie);
+								fprintf(fptr,"RACA: %s,", no->raca);
+								fprintf(fptr,"IDADE: %d,", no->idade);
+								fprintf(fptr,"PROPRIETARIO: %s,", no->nomeProprietario);
+								fprintf(fptr,"TOTAL: %f,", soma(no->v));
+								fprintf(fptr,"TELEFONE: %s,\n", no->telefone);
 								
-							
-							
-							}
+								auxiliar=head; 									
+								contador = 0; 																	 
+								
+							    while (auxiliar!=NULL){
+									
+									if(auxiliar->v == no->v){
+																					
+										fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 										
+										fprintf(fptr, "IDANIMAL: %8d\n", auxiliar->v);
+										fprintf(fptr, "IDSESSAO: %8d\n", auxiliar->k);										
+										fprintf(fptr,"DATA: %8s\n", auxiliar->data);
+										fprintf(fptr, "TIPO: %8d\n", auxiliar->tipo);
+										fprintf(fptr, "SINTOMAS: %8s\n", auxiliar->sintomas);
+										fprintf(fptr, "DIAGNOSTICO %8s\n", auxiliar->diagnostico);
+										fprintf(fptr, "VACINAS: %8s\n", auxiliar->vacinas);
+										fprintf(fptr, "EXAMES: %8s\n", auxiliar->exames);
+										fprintf(fptr, "PRECO: %8f\n", auxiliar->preco);
+										fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 																						
+									}
+									
+									
+									auxiliar=auxiliar->prox; 
+									
+									contador++; 
+									
+							     }
+							     
+								 sum = soma(no->v); 
+							     fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXX SOMA TOTAL XXXXXXXXXXXXXXXXXXXXXXX\n"  );
+								 fprintf(fptr, "\n %8f \n",sum);  										
+							    
+							 }
+								//fprintf(fptr, "%s,\n",print_list()); 
+								//fprintf(fptr,"\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
+					            printf("\n RELATORIO GERADO COM SUCESSO \n");                                 	                                													    						    						        					    
+					
+					   		    fclose(fptr);
+					   
+					   }
 						
 						
 					}
@@ -443,12 +469,79 @@ int main(void) {
 				
 				}
 				case 6:
-				{				
+				{			
+				    fflush(stdout); 	
+				    printf("ATUALIZANDO BASE DE DADOS..."); 					 
+					
+					if(get_size("petnames.txt") == 0)
+					{
+					    printf("BASE DE DADOS VAZIA OU INEXISTENTE.");
+					    //id=0; 
+					}
+					else
+					{
+						
+					FILE* stream = fopen("petnames.txt", "r");
+
+				    char line[1024];
+				    while (fgets(line, 1024, stream))
+				    {
+				        char* tmp = strdup(line);	
+				        char* tmp2 = strdup(line);	
+				        char* tmp3 = strdup(line);	
+				        char* tmp4 = strdup(line);	
+				        char* tmp5 = strdup(line);	
+				        char* tmp6 = strdup(line);	
+				        char* tmp7 = strdup(line);	
+				        char* tmp8 = strdup(line);	
+				        
+						id = atoi(getfield(tmp, 1)); 						
+						nome = getfield(tmp2, 2); 
+						especie= getfield(tmp3, 3); 
+						raca= getfield(tmp4, 4); 
+						idade= atoi(getfield(tmp5, 5)); 
+						nomeproprietario= getfield(tmp6, 6); 
+						conta= strtof(getfield(tmp7, 7),NULL); 
+						telefone= getfield(tmp8, 8); 
+												
+						
+						fflush(stdin); 
+						//printf(" %s\n", getfield(tmp, 5));
+						//nome[30] = (char*)getfield(tmp2, 2);
+						//printf("nome: %s", nome); 
+				        //adicionar_lista(id,nome,especie,raca,idade,nomeproprietario,conta,telefone); 
+				        printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
+							printf("ID: %8d\n", id);
+							printf("NOME: %8s\n", nome);
+							printf("ESPECIE: %8s\n", especie);
+							printf("RACA: %8s\n", raca);
+							printf("IDADE %8d\n", idade);
+							printf("DONO: %8s\n", nomeproprietario);
+							printf("CONTA TOTAL: %8f\n", conta);
+							printf("TELEFONE: %8s\n", telefone);
+							printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
+				        
+				        
+				        //printf("Field 3 would be %s\n", getfield(tmp, 5));
+				        // NOTE strtok clobbers tmp
+				        free(tmp);
+				        fclose(stream); 
+				        
+						//printf("LIMPANDO BASE DE DADOS ANTERIOR..."); 
+						//	if (remove("petnames.txt") == 0) 
+		      			//			printf("ARQUIVO EXCLUIDO COM SUCESSO"); 
+		   				//		else
+		      			//			printf("NAO FOI POSSIVEL EXCLUIR ARQUIVO"); 
+				        
+				    }
+					    
+					}
+				    
 					printf("\n\n Opcao escolhida: 6");
 					//system("cls");
 					imprimir_lista(); 
 					//print_list(); 
-	                system("Pause"); 
+	                //system("Pause"); 
 					break;
 				
 				}

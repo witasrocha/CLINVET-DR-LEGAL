@@ -270,7 +270,7 @@ int size_list()
 	return tam;
 }
 
-float soma(){
+float soma(int j){
 	if(empty_list())
 		return 0; 
 		
@@ -279,8 +279,13 @@ float soma(){
 	
 	while(aux !=NULL)
 	{
+		if(aux->v==j){
+		 
 		soma=aux->preco+soma; 
 		aux=aux->prox; 
+			
+		}
+		
 		
 		
 	}
@@ -289,3 +294,4 @@ float soma(){
 	
 	
 }
+

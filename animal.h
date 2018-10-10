@@ -17,10 +17,10 @@ typedef struct animal
 // variáveis ponteiros globais que guardam referência
 // para a cabeça da lista e para o nó corrente
 // cabeca da lista encadeada (começa com NULL)
-//t_animal *cabeca = NULL;
-//t_animal *corrente = NULL;
-t_animal *cabeca;
-t_animal *corrente;
+t_animal *cabeca = NULL;
+t_animal *corrente = NULL;
+//t_animal *cabeca;
+//t_animal *corrente;
 
 
 // função para criar uma lista
