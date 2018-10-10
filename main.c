@@ -45,12 +45,7 @@ int main(void) {
 	//adicionar_lista(2,"SCOOBY DOO","CACHORRO", "DESCONHECIDO",2, "SALCICHA", 50,"77777777" ); 
 	//adicionar_lista(3, "MILK SHAKE","GATO", "DESCONHECIDO",4, "BILLY E MANDY", 100,"777-77777" ); 	
 	// função que verifica se a lista está vazia
-	
-	printf("Tamanho da lista: %d\n\n", tamanho_lista());
-
-
-	//add_list(1,1,"06/10/18","VAC","FEBRE","FALTA OSSO","N","CABECA",100); 			
-	
+			
 		   
    
    	
@@ -84,13 +79,8 @@ int main(void) {
 	//telefone = malloc(sizeof(telefone)); 
 	        	        		
 		while(escolha!=8){
-		    
-		    if(lista_vazia() == 0)
-			printf("A lista NAO esta vazia!!\n\n");
-			else
-			printf("Lista vazia!!\n\n");
-		
-			printf("Tamanho da lista: %d\n\n", tamanho_lista());
+		    		   		
+			//printf("Tamanho da lista: %d\n\n", tamanho_lista());
 			printf(" \n %8s \n","XXXXXXXXXXXXXXXXX  CONSULTORI VET DR LEGAL XXXXXXXXXXXXXXXXXXXXXXXXX"  );  
 		    printf("%8d\t%8s\n", 1,"CADASTRAR ANIMAL");		
 		    printf("%8d\t%8s\n", 2,"REMOVER ANIMAL");		
@@ -242,7 +232,7 @@ int main(void) {
 				
 				case 2:
 				{				
-					printf("\n\n Opcao escolhida: 2 ");
+					printf("\n\n Opcao escolhida: 2 \n");
 					int j, r; 
 									
 					printf("INSIRA O ID DO ANIMAL QUE DESEJA REMOVER:");						
@@ -258,16 +248,14 @@ int main(void) {
 							
 							printf("NAO FOI POSSIVEL REMOVER");						
 					}
-					}
 					
-					
-										
+					}																				
 					break;
 				}
 				
 				case 3:
 				{	
-				printf("\n\n Opcao escolhida: 3 ");
+				printf("\n\n Opcao escolhida: 3 \n");
 					t_animal *ant = NULL;
 					t_animal*p; 
 				int j, r; 									
@@ -315,8 +303,7 @@ int main(void) {
 					p->idade = idade; 
 					p-> telefone = telefone; 	
 						
-						
-						
+												
 					}
 					
 					break;
@@ -326,7 +313,7 @@ int main(void) {
 				{				
 					t_animal *ant = NULL;
 					t_animal*p; 
-					printf("\n\n Opcao escolhida: 4 ");
+					printf("\n\n Opcao escolhida: 4 \n");
 					int j, r; 									
 					printf("\n INSIRA O ID DO ANIMAL QUE DESEJA BUSCAR:");						
 					scanf("%d", &j); 
@@ -356,36 +343,101 @@ int main(void) {
 				
 				case 5:
 				{				
-					printf("\n\n Opcao escolhida: 5 ");
 					
-						FILE * fptr;
-					    fptr = fopen("petnames.txt", "w");
+					t_animal *ant = NULL;
+					t_animal*p; 
+					t_sessoes*q; 
+					t_sessoes *back = NULL;
 					
-					    if(fptr==NULL)
-					    {
-					        printf("Error\n");
-					    }
+					printf("\n\n Opcao escolhida: 5 \n");
+					int j, r, b, contador; 									
+					printf("\n INSIRA O ID DO ANIMAL QUE DESEJA BUSCAR:");						
+					scanf("%d", &j); 
+					p = buscar_elemento(j,&ant); 
+					if(p==NULL){
+						
+					printf("\n ANIMAL NAO ENCONTRADO \n"); 
+					}else{
+						
+					    q = search_element(j, &back); 
+					    if(q==NULL){
+					    	
+					    	printf("\n SESSAO NAO ENCONTRADA \n"); 
+					    	
+						}else{
+						
+							printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
+							printf("ID: %8d\n", p->v);
+							printf("NOME: %8s\n", p->nomeAnimal);
+							printf("ESPECIE: %8s\n", p->especie);
+							printf("RACA: %8s\n", p->raca);
+							printf("IDADE %8d\n", p->idade);
+							printf("DONO: %8s\n", p->nomeProprietario);
+							printf("CONTA TOTAL: %8f\n", soma());
+							printf("TELEFONE: %8s\n", p->telefone);
+							printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
+							
+							
+							FILE * fptr;
+					        fptr = fopen(strcat(p->nomeAnimal,".txt"), "w");
 					
-					    else
-					    {
-					    	t_animal *aux = cabeca;
-					        while(aux != NULL)
-					        {
-					            //fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n" );
-					            fprintf(fptr,"%d,", aux->v);
-								fprintf(fptr,"%s,", aux->nomeAnimal);
-								fprintf(fptr,"%s,", aux->especie);
-								fprintf(fptr,"%s,", aux->raca);
-								fprintf(fptr,"%d,", aux->idade);
-								fprintf(fptr,"%s,", aux->nomeProprietario);
-								fprintf(fptr,"%f,", aux->conta);
-								fprintf(fptr,"%s,\n", aux->telefone);
-								//fprintf(fptr,"\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
-					            aux = aux->prox;
-					        }
-					    }
+						    if(fptr==NULL)
+						    {
+						        printf("Error\n");
+						    }
+						
+						    else
+						    {
+						    		printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 																
+						          //fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n" );
+						            fprintf(fptr,"%d,", p->v);
+									fprintf(fptr,"%s,", p->nomeAnimal);
+									fprintf(fptr,"%s,", p->especie);
+									fprintf(fptr,"%s,", p->raca);
+									fprintf(fptr,"%d,", p->idade);
+									fprintf(fptr,"%s,", p->nomeProprietario);
+									fprintf(fptr,"%f,", soma());
+									fprintf(fptr,"%s,\n", p->telefone);
+									
+									q=head; 									
+									contador = 0; 
+									while (q!=NULL){
+										
+										if(contador<10){
+											fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 										
+											fprintf(fptr, "IDSESSAO: %8d\n", q->k);
+											fprintf(fptr,"DATA: %8s\n", q->data);
+											fprintf(fptr, "TIPO: %8d\n", q->tipo);
+											fprintf(fptr, "SINTOMAS: %8s\n", q->sintomas);
+											fprintf(fptr, "DIAGNOSTICO %8s\n", q->diagnostico);
+											fprintf(fptr, "VACINAS: %8s\n", q->vacinas);
+											fprintf(fptr, "EXAMES: %8s\n", q->exames);
+											fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 																						
+										}
+										
+										
+										q=q->prox; 
+										
+										contador++; 
+										
+									}
+									//fprintf(fptr, "%s,\n",print_list()); 
+									//fprintf(fptr,"\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
+						        
+						        
+						    }
+						
+						    fclose(fptr);
+								
+							
+							
+							}
+						
+						
+					}
 					
-					    fclose(fptr);
+					    
+						
 					    
 					break;
 				
@@ -404,6 +456,7 @@ int main(void) {
 				case 7:
 				{			
 				    int idanima,ls,tipo; 
+				    float sum=0; 
 				    //int idsession; 
 			        //char*data=malloc(255); 
 					//char*tipo=malloc(255); 
@@ -442,22 +495,31 @@ int main(void) {
 					fflush(stdin); 
 					printf("INSIRA O DIAGNOSTICO :");		
 					fgets(diagnostico,255,stdin); 						
-					exame[strlen(diagnostico) - 1] = '\0';
+					diagnostico[strlen(diagnostico) - 1] = '\0';
 					fflush(stdin); 			
 					
 					if(tipo ==1){												
-						preco = 50; 												
+						preco = 50; 
+						
+																		
 					}else if(tipo==2){					   					   
 					    preco = 30; 
-					   
+					    
 					}else if(tipo==3){					  					   
 					   preco = 110; 					   
+					   
+					}else{
+					   preco=0; 
 					}
 					
 					
 					add_list(idanima,ls, data, tipo, sintomas,diagnostico, vacina, exame, preco); 
 										
-					print_list(); 
+					
+					
+					//sum = soma(); 
+					
+					//printf("SOMA TOTAL: %f", sum); 
 															
 					break;
 				

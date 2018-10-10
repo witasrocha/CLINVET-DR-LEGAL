@@ -87,7 +87,7 @@ t_sessoes* add_list(int v, int k,  char*data, int tipo, char*sintomas, char*diag
 	// verifica se houve falha na alocação de memória
 	if(p == NULL)
 	{
-		printf("\nFalha ao alocar memoria\n");
+		printf("\n Falha ao alocar memoria\n");
 		return NULL;
 	}
 
@@ -104,8 +104,7 @@ t_sessoes* add_list(int v, int k,  char*data, int tipo, char*sintomas, char*diag
 	p->prox = NULL;
 
 	// insere no FINAL da lista (obs.: também poderia ser no início)
-	// aqui será feita a inserção no final,
-	// a inserção no início fica como um desafio ;-)
+	// aqui será feita a inserção no final,	
 	// para inserção no final, fazemos com que o próximo do nó
 	// chain aponte para o "p"
 	chain->prox = p;
@@ -123,11 +122,8 @@ void print_list()
 	// variável ponteiro "aux" para percorrer a lista
 	// inicialmente aponta para a "head"
 	t_sessoes *aux = head;
-    printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXX LISTAGEM DE SESSOES XXXXXXXXXXXXXXXXXXXXXXXXXX"  ); 
-    //printf("%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\n", "ANIMAL", "SESSAO", "DATA","TIPO","SINTOMAS","DIAGNOSTICO","VACINAS","EXAME","PRECO"  ); 
-    
-    
-    
+    printf("\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXX LISTAGEM DE SESSOES XXXXXXXXXXXXXXXXXXXXXXXXXX"  ); 
+    //printf("%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\n", "ANIMAL", "SESSAO", "DATA","TIPO","SINTOMAS","DIAGNOSTICO","VACINAS","EXAME","PRECO"  );             
 	// enquanto "aux" for diferente de NULL
 	while(aux != NULL)
 	{
@@ -272,4 +268,24 @@ int size_list()
 		aux = aux->prox;
 	}
 	return tam;
+}
+
+float soma(){
+	if(empty_list())
+		return 0; 
+		
+	t_sessoes *aux = head;
+	float soma=0; 
+	
+	while(aux !=NULL)
+	{
+		soma=aux->preco+soma; 
+		aux=aux->prox; 
+		
+		
+	}
+	
+	return soma; 
+	
+	
 }
