@@ -243,7 +243,7 @@ int main(void) {
 				printf("\n\n Opcao escolhida: 3 \n");
 					t_animal *ant = NULL;
 					t_animal*p; 
-				int j, r; 									
+			     	int j, r; 									
 					printf("\n INSIRA O ID DO ANIMAL QUE DESEJA ALTERAR:");						
 					scanf("%d", &j); 
 					p = buscar_elemento(j,&ant); 
@@ -365,15 +365,22 @@ int main(void) {
 				}
 				
 				case 5:
-				{				
+				{									
+					t_animal *ant;
+					char str[255]; 
+					char str2[255]; 
+					char str3[255]; 
+					int t; 
+					strcpy(str3,"Animal_"); 					
 					
-					t_animal *ant = NULL;
+					ant = malloc(sizeof(ant)); 
+					ant = NULL; 
 					//t_animal*p; 
 					t_animal*no; 
 					no=malloc(sizeof(no)); 
 					t_sessoes*q=malloc(sizeof(t_sessoes)); 
-					t_sessoes*auxiliar; 
-					print_list(); 
+					t_sessoes*auxiliar; 					
+					//print_list(); 
 					//t_sessoes *back = NULL;	
 					float sum=0; 													
 					
@@ -383,6 +390,7 @@ int main(void) {
 					scanf("%d", &j); 
 					
 					no = buscar_elemento(j, &ant); 
+										
 					
 					if(no==NULL){
 					//r = j; 	
@@ -396,7 +404,11 @@ int main(void) {
 						
 					      	FILE * fptr;														
 							
-					        fptr = fopen(strcat(no->nomeAnimal,".txt"), "w");
+							strcpy(str,no->nomeAnimal); 
+							itoa(no->v,str2,255); 
+							strcat(str3,str2); 														
+							strcat(str3,str); 
+					        fptr = fopen(strcat(str3,".txt"), "w");
 					        //fptr = fopen("report.txt", "w");
 					
 						    if(fptr==NULL)
@@ -407,7 +419,7 @@ int main(void) {
 						    else
 						    {
 	                                
-	                                	
+	                            t = no->v;     	
                               // fprintf(fptr,"\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 																
 					           fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n" );
 					            fprintf(fptr,"ID DO ANIMAL: %d,", no->v);
@@ -416,17 +428,18 @@ int main(void) {
 								fprintf(fptr,"RACA: %s,", no->raca);
 								fprintf(fptr,"IDADE: %d,", no->idade);
 								fprintf(fptr,"PROPRIETARIO: %s,", no->nomeProprietario);
-								fprintf(fptr,"TOTAL: %f,", soma(no->v));
+								fprintf(fptr,"TOTAL: %f,", soma(t));
 								fprintf(fptr,"TELEFONE: %s,\n", no->telefone);
 								
 								auxiliar=head; 									
 								contador = 0; 																	 
+																
 								
 							    while (auxiliar!=NULL){
 									
-									if(auxiliar->v == no->v){
+									if(auxiliar->v == t){
 																					
-										fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 										
+										fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 										
 										fprintf(fptr, "IDANIMAL: %8d\n", auxiliar->v);
 										fprintf(fptr, "IDSESSAO: %8d\n", auxiliar->k);										
 										fprintf(fptr,"DATA: %8s\n", auxiliar->data);
@@ -453,8 +466,7 @@ int main(void) {
 							 }
 								//fprintf(fptr, "%s,\n",print_list()); 
 								//fprintf(fptr,"\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"  ); 
-					            printf("\n RELATORIO GERADO COM SUCESSO \n");                                 	                                													    						    						        					    
-					
+					            printf("\n RELATORIO GERADO COM SUCESSO \n");                                 	                                													    						    						        					    					
 					   		    fclose(fptr);
 					   
 					   }

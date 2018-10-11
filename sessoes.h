@@ -282,9 +282,11 @@ float soma(int j){
 		if(aux->v==j){
 		 
 		soma=aux->preco+soma; 
-		aux=aux->prox; 
+		
 			
 		}
+		
+		aux=aux->prox; 
 		
 		
 		
@@ -294,4 +296,6 @@ float soma(int j){
 	
 	
 }
+
+
 
