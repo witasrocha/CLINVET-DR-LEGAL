@@ -67,7 +67,7 @@ int main(void) {
 				printf("...NAO FOI POSSIVEL EXCLUIR ARQUIVO."); 
 		
 
-       criar_lista(0,"COSTELINHA","CACHORRO","DESCONHECIDO",1,"DOUG FUNNY",0,0);
+       criar_lista(0,"COSTELINHA","CACHORRO","DESCONHECIDO",1,"DOUG FUNNY",100,0);
        create_list(0,0, "00/00", 1, "N","N", "N", "N", 0); 
    
    //fp = fopen("newfile.txt", "w+");
@@ -428,7 +428,7 @@ int main(void) {
 								fprintf(fptr,"RACA: %s,", no->raca);
 								fprintf(fptr,"IDADE: %d,", no->idade);
 								fprintf(fptr,"PROPRIETARIO: %s,", no->nomeProprietario);
-								fprintf(fptr,"TOTAL: %f,", soma(t));
+								fprintf(fptr,"TOTAL: %f,", soma(t)+no->conta);
 								fprintf(fptr,"TELEFONE: %s,\n", no->telefone);
 								
 								auxiliar=head; 									
@@ -459,7 +459,7 @@ int main(void) {
 									
 							     }
 							     
-								 sum = soma(no->v); 
+								 sum = soma(no->v)+no->conta; 
 							     fprintf(fptr, "\n %8s \n","XXXXXXXXXXXXXXXXXXXXXXXXXXX SOMA TOTAL XXXXXXXXXXXXXXXXXXXXXXX\n"  );
 								 fprintf(fptr, "\n %8f \n",sum);  										
 							    
