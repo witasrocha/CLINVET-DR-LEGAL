@@ -435,7 +435,7 @@ int main(void) {
 								contador = 0; 																	 
 																
 								
-							    while (auxiliar!=NULL){
+							    while (auxiliar!=NULL && contador <11){
 									
 									if(auxiliar->v == t){
 																					
