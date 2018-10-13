@@ -1,3 +1,12 @@
+/*
+
+INSTITUTO FEDERAL DA BAHIA (IFBA) 
+COMPUTAÇÃO E PROCESSAMENTOS DE DADOS - TRABALHO FINAL
+Data: 15/10/2018
+Equipe 2
+
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -5,7 +14,7 @@
 #include "sessoes.h"
 #include <assert.h>
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
 
 const char* getfield(char* line, int num)
 {
@@ -78,6 +87,7 @@ int main(void) {
 	//raca = malloc(sizeof(raca)); 
 	//nomeproprietario = malloc(sizeof(nomeproprietario)); 
 	//telefone = malloc(sizeof(telefone)); 
+	
 	    int contagem=1;     	        		
 		while(escolha!=8){
 		    		   		
@@ -133,7 +143,7 @@ int main(void) {
 					printf("INSIRA O VALOR DA CONTA:");						
 					scanf("%f",&conta); 
 					fflush(stdin);
-					printf("INSIRA O VALOR DO TELEFONE:");		
+					printf("INSIRA O NUMERO DE TELEFONE:");		
 					fgets(telefone, 255, stdin); 
 					telefone[strlen(telefone) - 1] = '\0';
 
